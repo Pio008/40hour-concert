@@ -285,13 +285,25 @@
       margin-top: 0.5rem;
     }
 
-    /* Performers section */
-    .performers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
+.performers-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Ensures 2 rows of 5 */
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .performers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .performers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
     .performer-card {
   background: rgba(255, 255, 255, 0.05);
@@ -530,7 +542,10 @@
   <section class="hero">
     <div class="hero-content">
       <h1>The 40-Hour Vexation</h1>
-      <p class="hero-subtitle">An Experimental Piano Concert of Endurance and Inspiration</p>
+      <p class="hero-subtitle" style="animation: fadeInUp 1s ease-out 0.15s both;">
+  An Experimental Piano Concert of Endurance and Inspiration
+</p>
+
       <p class="hero-description">
         Ten pianists. Forty hours. One extraordinary musical journey through Erik Satie's hypnotic masterpiece.
       </p>
