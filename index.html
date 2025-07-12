@@ -559,19 +559,43 @@
       <a class="btn" href="https://buymeacoffee.com/francescopio" target="_blank">
         ☕ Support the Project
       </a>
-      <!-- Minimal progress bar below button -->
-      <div id="progress-container" class="fade-in" style="max-width: 300px; margin: 0.5rem auto 0 auto; opacity: 0;">
-        <div style="background: rgba(255,255,255,0.1); border-radius: 8px; height: 8px; overflow: hidden;">
-          <div id="progress-bar" style="
-            background: #fdd835;
-            height: 100%;
-            width: 0%; /* start at 0 */
-            transition: width 1.2s ease;
-          "></div>
-        </div>
-        <p id="progress-text" style="font-size: 0.75rem; color: #fdd835; text-align: center; margin: 0.3rem 0 0 0; font-weight: 600;">
-          £0 raised of £7,000 goal
-        </p>
+     <!-- Minimal progress bar below button with synchronized fade-in and width animation -->
+<div id="progress-container" style="max-width: 300px; margin: 0.5rem auto 0 auto; opacity: 0;">
+  <div style="background: rgba(255,255,255,0.1); border-radius: 8px; height: 8px; overflow: hidden;">
+    <div id="progress-bar" style="background: #fdd835; height: 100%; width: 0%; transition: width 1.2s ease;"></div>
+  </div>
+  <p id="progress-text" style="font-size: 0.75rem; color: #fdd835; text-align: center; margin: 0.3rem 0 0 0; font-weight: 600; opacity: 0;">
+    £0 raised of £7,000 goal
+  </p>
+</div>
+
+<script>
+  const raised = 3520;  // Update this number to reflect current amount raised
+  const goal = 7000;
+
+  const progressPercent = Math.min((raised / goal) * 100, 100);
+
+  const container = document.getElementById('progress-container');
+  const progressBar = document.getElementById('progress-bar');
+  const progressText = document.getElementById('progress-text');
+
+  // Set fade-in transitions
+  container.style.transition = 'opacity 1.2s ease';
+  progressText.style.transition = 'opacity 1.2s ease';
+
+  // Trigger fade-in after slight delay for initial render
+  setTimeout(() => {
+    container.style.opacity = '1';
+    progressText.style.opacity = '1';
+  }, 100);
+
+  // After fade-in complete, animate progress bar and update text
+  setTimeout(() => {
+    progressBar.style.width = progressPercent + '%';
+    progressText.textContent = `£${raised.toLocaleString()} raised of £${goal.toLocaleString()} goal`;
+  }, 1300);
+</script>
+
       </div>
     </div>
   </section>
