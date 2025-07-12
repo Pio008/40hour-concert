@@ -7,204 +7,760 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Lato', sans-serif; /* Switched to Lato for readability */
-      line-height: 1.8;
-      background-color: #1a1a1a; /* Dark background */
-      color: #f5f5f5; /* Off-white text */
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    header {
-      /* --- ACTION REQUIRED: Add your background image URL here --- */
-      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1520262454473-a1a82276a574?q=80&w=2070&auto=format&fit=crop');
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #f8f9fa;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Hero section with enhanced design */
+    .hero {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), 
+                  url('https://images.unsplash.com/photo-1520262454473-a1a82276a574?q=80&w=2070&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
-      color: #fff;
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 6rem 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif; /* Elegant serif for main title */
-      font-size: 4rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(253, 216, 53, 0.1) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite;
     }
 
-    header p {
-      font-size: 1.3rem;
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      background: linear-gradient(135deg, #fff 0%, #fdd835 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
       opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto;
+      animation: fadeInUp 1s ease-out 0.3s both;
     }
 
+    .hero-description {
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Enhanced button styles */
     .btn {
       display: inline-block;
-      background: #fdd835;
+      background: linear-gradient(135deg, #fdd835 0%, #f9c23c 100%);
       color: #111;
-      padding: 0.8rem 1.8rem;
+      padding: 1rem 2.5rem;
       text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      margin-top: 1.5rem;
-      transition: transform 0.2s ease, background-color 0.2s ease;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 25px rgba(253, 216, 53, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
     }
 
     .btn:hover {
       transform: translateY(-3px);
-      background: #fff;
+      box-shadow: 0 12px 35px rgba(253, 216, 53, 0.5);
     }
 
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26, 26, 26, 0.98);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fdd835;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #f8f9fa;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fdd835;
+    }
+
+    /* Container */
     .container {
-      max-width: 850px;
-      margin: auto;
-      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
+    /* Section styling */
     section {
-      padding: 2.5rem 1rem;
-      border-bottom: 1px solid #333; /* Separator line between sections */
-    }
-    
-    section:last-of-type {
-        border-bottom: none;
+      padding: 6rem 0;
+      position: relative;
     }
 
-    h2 {
-        font-family: 'Playfair Display', serif; /* Serif for all section headers */
-        font-size: 2.5rem;
-        color: #fdd835; /* Accent color for headers */
-        text-align: center;
-        margin-bottom: 2rem;
+    section:not(:last-child) {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Performers section styled as a grid */
-    .performers-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        text-align: center;
-        padding: 0;
-        list-style: none;
-    }
-    
-    .performers-grid li {
-        background: #252525;
-        padding: 1.5rem 1rem;
-        border-radius: 8px;
-        transition: background-color 0.3s;
-    }
-    
-    .performers-grid li:hover {
-        background-color: #333;
-    }
-
-    /* List for "Why We Need Your Help" with icons */
-    .reasons-list {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .reasons-list li {
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-    }
-    
-    .reasons-list li::before {
-        /* Basic text-based icons, can be replaced with SVGs or icon font */
-        content: '✓';
-        color: #fdd835;
-        font-weight: bold;
-        margin-right: 15px;
-        font-size: 1.2rem;
-    }
-
-    footer {
-      background: #111;
+    .section-header {
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #888;
+      margin-bottom: 4rem;
     }
-    
-    /* Center the final button */
-    .center-btn {
-        text-align: center;
-        margin-top: 2rem;
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: #fdd835;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: rgba(248, 249, 250, 0.8);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* About section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(248, 249, 250, 0.9);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(253, 216, 53, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fdd835;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: rgba(248, 249, 250, 0.8);
+      margin-top: 0.5rem;
+    }
+
+    /* Performers section */
+    .performers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .performer-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid rgba(253, 216, 53, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* New lines to center content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  text-align: center;
+}
+
+
+    .performer-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #fdd835, #f9c23c);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .performer-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .performer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(253, 216, 53, 0.2);
+    }
+
+    .performer-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f8f9fa;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .performer-role {
+      color: #fdd835;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Support section */
+    .support-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .support-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(248, 249, 250, 0.9);
+    }
+
+    .support-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .support-list li {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      border-left: 4px solid #fdd835;
+      transition: all 0.3s ease;
+    }
+
+    .support-list li:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .support-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 1rem;
+      color: #fdd835;
+      font-size: 1.2rem;
+    }
+
+    /* Contact section */
+    .contact-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #fdd835, #f9c23c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #111;
+    }
+
+    .contact-label {
+      font-size: 0.9rem;
+      color: rgba(248, 249, 250, 0.8);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      font-weight: 600;
+      color: #f8f9fa;
+    }
+
+    .contact-value a {
+      color: #fdd835;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-value a:hover {
+      color: #f9c23c;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f0f0f;
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-content {
+      color: rgba(248, 249, 250, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .footer-heart {
+      color: #fdd835;
+      font-size: 1.2rem;
+      margin: 0 0.5rem;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .about-content,
+      .support-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .performers-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(253, 216, 53, 0.3);
+      z-index: 1001;
+    }
+
+    .scroll-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #fdd835, #f9c23c);
+      width: 0%;
+      transition: width 0.3s ease;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>The 40-Hour Vexation</h1>
-    <p>An experimental piano concert of endurance and inspiration</p>
-    <a class="btn" href="https://buymeacoffee.com/francescopio" target="_blank">☕ Support the Project</a>
-  </header>
-
-  <div class="container">
-
-<section>
-  <h2>What Is This?</h2>
-  <p style="text-align: center; font-size: 1.1rem;">
-    A group of pianists will perform a continuous 40-hour piano concert, a musical odyssey inspired by Erik Satie’s legendary "Vexations". 
-    This provocative 1893 piece famously requires its brief, melancholic motif to be repeated 840 times, 
-    resulting in a hypnotic performance challenging concepts of time and endurance. 
-    We're aiming to host this event at St James’s Church, Piccadilly, But we need your help, if you can donate even the most little it will help us
-  </p>
-</section>
-
-    <section>
-      <h2>The Performers</h2>
-      <p style="text-align: center;">10 pianists will take turns across 40 hours of continuous music:</p>
-      <ul class="performers-grid">
-        <li>Francesco Pio Gennarelli</li>
-        <li>Matthew Lee Knowles</li>
-        <li>Jelena Makarova</li>
-        <li>Maya-Leigh Rosenwasser</li>
-        <li>Neil Georgeson</li>
-        <li>Aidan Chan</li>
-        <li>Edward Tait</li>
-        <li>Paul David Kean</li>
-        <li>Ben Smith</li>
-        <li>Thomas Ang</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Why We Need Your Help</h2>
-      <p>Your donations will go directly toward these crucial elements:</p>
-      <ul class="reasons-list">
-        <li>Venue and piano hire</li>
-        <li>Security during the evenings</li>
-        <li>Livestreaming and technical setup</li>
-        <li>Public access and outreach</li>
-      </ul>
-      <p>Every coffee you buy helps keep the music going — literally.</p>
-       <div class="center-btn">
-          <a class="btn" href="https://buymeacoffee.com/francescopio" target="_blank">🎶 Donate Now</a>
-      </div>
-    </section>
-
-    <section>
-      <h2>Stay Updated</h2>
-      <p style="text-align: center; font-size: 1.1rem;">
-        Follow the journey on Instagram: <strong>@yourhandle</strong><br>
-        Or reach out via email: <strong>youremail@example.com</strong>
-      </p>
-    </section>
-
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress" id="scrollProgress"></div>
   </div>
 
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">Vexations</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#performers">Performers</a></li>
+        <li><a href="#support">Support</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>The 40-Hour Vexation</h1>
+      <p class="hero-subtitle">An Experimental Piano Concert of Endurance and Inspiration</p>
+      <p class="hero-description">
+        Ten pianists. Forty hours. One extraordinary musical journey through Erik Satie's hypnotic masterpiece.
+      </p>
+      <a class="btn" href="https://buymeacoffee.com/francescopio" target="_blank">
+        ☕ Support the Project
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Is This?</h2>
+        <p class="section-subtitle">A groundbreaking interpretation of Erik Satie's legendary composition</p>
+      </div>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            Erik Satie's "Vexations" (1893) is one of the most provocative pieces in classical music history. 
+            This brief, melancholic motif is meant to be repeated 840 times, creating a hypnotic performance 
+            that challenges our concepts of time, endurance, and musical experience.
+          </p>
+          <p>
+            Our ambitious project brings together ten accomplished pianists for a continuous 40-hour performance. 
+            This isn't just a concert—it's an exploration of 
+            human endurance, musical meditation, and the transformative power of repetition.
+          </p>
+        </div>
+        
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-number">40</span>
+            <span class="stat-label">Hours of Music</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">840</span>
+            <span class="stat-label">Repetitions</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Pianists</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Masterpiece</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performers Section -->
+  <section id="performers">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">The Performers</h2>
+        <p class="section-subtitle">Ten dedicated pianists committed to this extraordinary musical journey</p>
+      </div>
+      
+      <div class="performers-grid">
+        <div class="performer-card">
+          <div class="performer-name">Francesco Pio Gennarelli</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Matthew Lee Knowles</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Jelena Makarova</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Maya-Leigh Rosenwasser</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Neil Georgeson</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Aidan Chan</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Edward Tait</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Paul David Kean</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Ben Smith</div>
+        </div>
+        <div class="performer-card">
+          <div class="performer-name">Thomas Ang</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support Section -->
+  <section id="support">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why We Need Your Help</h2>
+        <p class="section-subtitle">Your support makes this extraordinary musical experience possible</p>
+      </div>
+      
+      <div class="support-content">
+        <div class="support-text">
+          <p>
+            Creating a 40-hour continuous performance requires significant resources and planning. 
+            Your donations directly support the artistic vision and ensure this groundbreaking event 
+            can reach audiences worldwide.
+          </p>
+          <p>
+            Every contribution, no matter the size, helps us maintain the highest standards of 
+            artistic excellence while making this unique experience accessible to all.
+          </p>
+        </div>
+        
+        <div>
+          <ul class="support-list">
+            <li>
+              <span class="support-icon">🏛</span>
+              <span>Renting the venue and piano hire at St James's Church, Piccadilly</span>
+            </li>
+            <li>
+              <span class="support-icon">🛡</span>
+              <span>24-hour security and event management</span>
+            </li>
+            <li>
+              <span class="support-icon">📹</span>
+              <span>Professional livestreaming and recording equipment</span>
+            </li>
+            <li>
+              <span class="support-icon">🎵</span>
+              <span>Public accessibility and community outreach</span>
+            </li>
+            <li>
+              <span class="support-icon">☕</span>
+              <span>Performer support and refreshments</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 3rem;">
+        <a class="btn" href="https://buymeacoffee.com/francescopio" target="_blank">
+          🎶 Support the Performance
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Stay Connected</h2>
+        <p class="section-subtitle">Follow our journey and be part of this historic musical event</p>
+      </div>
+      
+      <div class="contact-content">
+        <p>
+          Join our community of music lovers and supporters. Stay updated on rehearsals, 
+          behind-the-scenes content, and the countdown to our 40-hour performance.
+        </p>
+        
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">
+              <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:youremail@example.com">youremail@example.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    Made with ❤️ by Francesco Pio | Hosted on GitHub Pages
+    <div class="container">
+      <div class="footer-content">
+        <p>
+          Made with <span class="footer-heart">❤</span> by Francesco Pio Gennarelli
+          <br>
+          <small>&copy; 2025 The 40-Hour Vexation Project. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
   </footer>
 
+  <script>
+    // Smooth scrolling and navbar effects
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      const scrollProgress = document.getElementById('scrollProgress');
+      
+      // Navbar scroll effect
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      // Scroll progress indicator
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      scrollProgress.style.width = scrolled + '%';
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
